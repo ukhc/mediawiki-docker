@@ -15,7 +15,7 @@ docker build -t 127.0.0.1:30500/internal/mediawiki:$VERSION . --no-cache
 
 ~~~
 # start the container
-docker run --name mediawiki -p 8080:80 -d mediawiki
+docker run --name mediawiki -p 8080:80 -d 127.0.0.1:30500/internal/mediawiki:$VERSION
 
 # see the status
 docker container ls
