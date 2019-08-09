@@ -7,7 +7,8 @@
 
 ## Build the image
 ~~~
-docker build -t 127.0.0.1:30500/internal/mediawiki:1.32.0-v1 . --no-cache
+VERSION=$(cat version)
+docker build -t 127.0.0.1:30500/internal/mediawiki:$VERSION . --no-cache
 ~~~
 
 ## Docker deployment to the local workstation
