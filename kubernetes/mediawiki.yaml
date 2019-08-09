@@ -1,0 +1,121 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mediawiki-pv-claim
+  labels:
+    app: mediawiki
+spec:
+  storageClassName: mediawiki-storage
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: mediawiki
+  labels:
+    app: mediawiki
+spec:
+  ports:
+    - port: 80
+  selector:
+    app: mediawiki
+  type: LoadBalancer
+  
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mediawiki-admin-secret
+type: Opaque
+data:
+  password: YWRtaW4=
+
+---
+
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: mediawiki
+  labels:
+    app: mediawiki
+spec:
+  selector:
+    matchLabels:
+      app: mediawiki
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: mediawiki
+    spec:
+      containers:
+      - image: 127.0.0.1:30500/internal/mediawiki:1.32.0-v1
+        name: mediawiki
+        env:
+        - name: MARIADB_HOST
+          value: mariadb
+        - name: MARIADB_PORT_NUMBER
+          value: '3306'
+        - name: MEDIAWIKI_DATABASE_NAME
+          value: mediawiki
+        - name: MEDIAWIKI_DATABASE_USER
+          value: root
+        - name: MEDIAWIKI_DATABASE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mariadb-root-secret
+              key: password
+        - name: MEDIAWIKI_USERNAME
+          value: admin
+        - name: MEDIAWIKI_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mediawiki-admin-secret
+              key: password
+        - name: MEDIAWIKI_EMAIL
+          value: a@b.com
+        - name: MEDIAWIKI_WIKI_NAME
+          value: MediaWiki
+#        livenessProbe:
+#          httpGet:
+#            path: /index.php
+#            port: http
+#          initialDelaySeconds: 180
+#          timeoutSeconds: 5
+#          successThreshold: 1
+#          failureThreshold: 3
+#        readinessProbe:
+#          httpGet:
+#            path: /index.php
+#            port: http
+#          initialDelaySeconds: 180
+#          timeoutSeconds: 1
+#          successThreshold: 1
+#          failureThreshold: 3
+        ports:
+        - containerPort: 80
+          name: http
+        volumeMounts:
+        - name: mediawiki-persistent-storage
+          mountPath: /var/www/html
+        #- name: mediawiki-config-volume
+        #  subPath: LocalSettings.php
+        #  mountPath: /var/www/html/LocalSettings.php
+      volumes:
+      - name: mediawiki-persistent-storage
+        persistentVolumeClaim:
+          claimName: mediawiki-pv-claim
+      #- name: mediawiki-config-volume
+      #  configMap:
+      #    name: mediawiki-config
+      #    items:
+      #    - key: LocalSettings.php
+      #      path: LocalSettings.php
