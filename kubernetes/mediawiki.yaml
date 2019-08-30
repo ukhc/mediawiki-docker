@@ -119,16 +119,16 @@ spec:
         ports:
         - containerPort: 80
           name: http
-        volumeMounts:
-        - name: mediawiki-persistent-storage
-          mountPath: /var/www/html
+        #volumeMounts:
+        #- name: mediawiki-persistent-storage
+        #  mountPath: /var/www/html
         #- name: mediawiki-config-volume
         #  subPath: LocalSettings.php
         #  mountPath: /var/www/html/LocalSettings.php
-      volumes:
-      - name: mediawiki-persistent-storage
-        persistentVolumeClaim:
-          claimName: mediawiki-pv-claim
+      #volumes:
+      #- name: mediawiki-persistent-storage
+      #  persistentVolumeClaim:
+      #    claimName: mediawiki-pv-claim
       #- name: mediawiki-config-volume
       #  configMap:
       #    name: mediawiki-config
