@@ -75,21 +75,12 @@ Before you deploy, you will need a running instance of MariaDB in Kubernetes: ht
 
 Deploy (run these commands from the root folder of this repo)
 ~~~
-mkdir -p /Users/Shared/Kubernetes/persistent-volumes/mediawiki
-kubectl apply -f ./kubernetes/mediawiki-local-pv.yaml
-kubectl apply -f ./kubernetes/mediawiki.yaml
-
-# validation
-kubectl get pods
-
-open http://127.0.0.1
+./local-apply.sh
 ~~~
 
 Note: The default admin password is admin
 
 Delete
 ~~~
-kubectl delete -f ./kubernetes/mediawiki.yaml
-kubectl delete -f ./kubernetes/mediawiki-local-pv.yaml
-rm -rf /Users/Shared/Kubernetes/persistent-volumes/mediawiki
+./local-delete.sh
 ~~~
