@@ -77,11 +77,11 @@ if [ "$RESTORE_MODE" == "--restore-database" ] || [ "$RESTORE_MODE" == "--restor
 then
 	echo "restore database..."
 	POD=$(kubectl get pod -l app=mariadb -o jsonpath="{.items[0].metadata.name}")
-	kubectl exec -it $POD -- /usr/bin/mysql -u root -padmin -e 'drop database if exists wordpress'
-	kubectl exec -it $POD -- /usr/bin/mysql -u root -padmin -e 'create database wordpress'
-	kubectl exec -i $POD -- /usr/bin/mysql -u root -padmin wordpress < ./backup/$BACKUP_FOLDER/database/mediawiki-dump.sql
+	kubectl exec -it $POD -- /usr/bin/mysql -u root -padmin -e 'drop database if exists mediawiki'
+	kubectl exec -it $POD -- /usr/bin/mysql -u root -padmin -e 'create database mediawiki'
+	kubectl exec -i $POD -- /usr/bin/mysql -u root -padmin mediawiki < ./backup/$BACKUP_FOLDER/database/mediawiki-dump.sql
 	# validate
-	# kubectl exec -it $POD -- /usr/bin/mysql -u root -padmin -e 'use drupal;show tables;'
+	# kubectl exec -it $POD -- /usr/bin/mysql -u root -padmin -e 'use mediawiki;show tables;'
 fi
 
 ##########################
