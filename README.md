@@ -42,7 +42,8 @@ docker container rm mediawiki
 The basic workflow is... 
 1. Deploy MediaWiki without a persistent volume so you can create a basic configuration
 1. Create a backup of that basic configuration
-1. Re-deploy WordPress with a persistent volume and restore from the backup
+1. Place the `LocalSettings.php` in your first backup to get things going
+1. Re-deploy MediaWiki with a persistent volume and restore from the backup
 1. Congratulations, you now have a working MediaWiki environment with a persistent volume
 
 From here you can make whatever changes you like to MediaWiki.  You can access the persistent volume on your local drive `/Users/Shared/Kubernetes/persistent-volumes/default/mediawiki`.  You can create more backups for point in time restores.  There's even a script that makes it easy to restart the MediaWiki deployment.  When you're all done, there is a delete script that will remove the deployment and the persistent volume but don't worry... as long as you have a backup, you can re-deploy and restore to the state where you left off.
