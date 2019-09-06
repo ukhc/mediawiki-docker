@@ -58,12 +58,25 @@ NOTE: Run the following commands from the root folder of this repo.
 Use this to do the initial installation and configuration for MediaWiki.  Once you are satisfied with the setup, you can back it up.
 
 
+Use these MariaDB values:
+- hostname: mariadb
+- user: root
+- password: admin
+- database name: mediawiki
+
+
+Note: When you have completed the install, you will be given a file called `LocalSettings.php`.  Save this file for an upcoming step.
+
+
 ### Create a backup of the persistent volume and database
 ~~~
 ./local-backup.sh
 ~~~
 
 This backs up the html folder as well as the database. The backup will be created in the 'backup' folder in this repo. You can take multiple backups.
+
+
+Note: You can now copy the `LocalSettings.php` file into the `./backup/YOURBACKUPFOLDER/html` folder.
 
 
 ### Delete the deployment
