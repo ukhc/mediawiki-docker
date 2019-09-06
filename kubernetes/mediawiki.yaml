@@ -110,22 +110,22 @@ spec:
           value: a@b.com
         - name: MEDIAWIKI_WIKI_NAME
           value: MediaWiki
-#livenessProbe#        livenessProbe:
-#livenessProbe#          httpGet:
-#livenessProbe#            path: /index.php
-#livenessProbe#            port: http
-#livenessProbe#          initialDelaySeconds: 180
-#livenessProbe#          timeoutSeconds: 5
-#livenessProbe#          successThreshold: 1
-#livenessProbe#          failureThreshold: 3
-#readinessProbe#        readinessProbe:
-#readinessProbe#          httpGet:
-#readinessProbe#            path: /index.php
-#readinessProbe#            port: http
-#readinessProbe#          initialDelaySeconds: 180
-#readinessProbe#          timeoutSeconds: 1
-#readinessProbe#          successThreshold: 1
-#readinessProbe#          failureThreshold: 3
+        livenessProbe:
+          tcpSocket:
+            port: 80
+          initialDelaySeconds: 120
+          periodSeconds: 10
+          timeoutSeconds: 3 
+          successThreshold: 1
+          failureThreshold: 3
+        readinessProbe:
+          tcpSocket:
+            port: 80
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 3
+          successThreshold: 1
+          failureThreshold: 3
         ports:
         - containerPort: 80
           name: http
