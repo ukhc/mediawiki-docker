@@ -31,9 +31,14 @@ kubectl delete -f ./kubernetes/mediawiki.yaml
 
 ##########################
 
+echo "delete mariadb...."
+kubectl delete -f https://raw.githubusercontent.com/ukhc/mariadb-docker/master/kubernetes/mariadb-single.yaml
+
+##########################
+
 echo "delete the persistent volume for mariadb...."
-kubectl delete -f ./kubernetes/mediawiki-local-pv.yaml
-rm -rf /Users/Shared/Kubernetes/persistent-volumes/mediawiki
+kubectl delete -f https://raw.githubusercontent.com/ukhc/mariadb-docker/master/kubernetes/mariadb-single-local-pv.yaml
+rm -rf /Users/Shared/Kubernetes/persistent-volumes/default/mariadb
 
 ##########################
 
