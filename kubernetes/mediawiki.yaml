@@ -21,7 +21,7 @@ metadata:
   labels:
     app: mediawiki
 spec:
-  storageClassName: mediawiki-storage
+  storageClassName: mediawiki-storage-class
   accessModes:
     - ReadWriteOnce
   resources:
