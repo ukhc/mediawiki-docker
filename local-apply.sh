@@ -33,7 +33,24 @@ kubectl apply -f ./kubernetes/mediawiki-local-pv.yaml
 ##########################
 
 echo "deploy mediawiki..."
-kubectl apply -f ./kubernetes/mediawiki.yaml
+rm -f yaml.tmp
+cp ./kubernetes/mediawiki.yaml yaml.tmp
+
+#### Use the '--with-volumes' parameter to turn on the volume mounts ####
+if [ "$1" == "--with-volumes" ]; then
+    echo "--with-volumes parameter was used, turning on the persistent volumes..."
+	sed -i '' 's/#- name/- name/' yaml.tmp
+	sed -i '' 's/#mountPath/mountPath/' yaml.tmp
+	sed -i '' 's/#persistentVolumeClaim/persistentVolumeClaim/' yaml.tmp
+	sed -i '' 's/#claimName/claimName/' yaml.tmp
+else
+    echo "--with-volumes parameter was not used, persistent volumes are off..."
+fi
+
+kubectl apply -f yaml.tmp
+rm -f yaml.tmp
+
+
 
 echo "wait for mediawiki..."
 sleep 2
