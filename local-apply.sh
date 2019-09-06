@@ -50,8 +50,6 @@ fi
 kubectl apply -f yaml.tmp
 rm -f yaml.tmp
 
-
-
 echo "wait for mediawiki..."
 sleep 2
 isPodReady=""
