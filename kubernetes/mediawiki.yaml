@@ -55,6 +55,16 @@ data:
 
 ---
 
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mediawiki-php-config
+data:
+  mediawiki-php.ini: |
+    ;add php config here
+
+---
+
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
@@ -119,19 +129,22 @@ spec:
         ports:
         - containerPort: 80
           name: http
-        #volumeMounts:
+        volumeMounts:
         #- name: mediawiki-persistent-storage
-        #  mountPath: /var/www/html
-        #- name: mediawiki-config-volume
-        #  subPath: LocalSettings.php
-        #  mountPath: /var/www/html/LocalSettings.php
-      #volumes:
+          #mountPath: /var/www/html
+        - name: mediawiki-etc-ssl-certs
+          mountPath: /etc/ssl/certs/incommon_intermed.pem
+          subPath: incommon_intermed.pem
+        - name: mediawiki-php-config
+          mountPath: /usr/local/etc/php/conf.d/mediawiki-php.ini
+          subPath: mediawiki-php.ini
+      volumes:
       #- name: mediawiki-persistent-storage
-      #  persistentVolumeClaim:
-      #    claimName: mediawiki-pv-claim
-      #- name: mediawiki-config-volume
-      #  configMap:
-      #    name: mediawiki-config
-      #    items:
-      #    - key: LocalSettings.php
-      #      path: LocalSettings.php
+        #persistentVolumeClaim:
+          #claimName: mediawiki-pv-claim
+      - name: mediawiki-etc-ssl-certs
+        configMap:
+          name: mediawiki-etc-ssl-certs
+      - name: mediawiki-php-config
+        configMap:
+          name: mediawiki-php-config
