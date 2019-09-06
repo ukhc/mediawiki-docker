@@ -110,41 +110,41 @@ spec:
           value: a@b.com
         - name: MEDIAWIKI_WIKI_NAME
           value: MediaWiki
-#        livenessProbe:
-#          httpGet:
-#            path: /index.php
-#            port: http
-#          initialDelaySeconds: 180
-#          timeoutSeconds: 5
-#          successThreshold: 1
-#          failureThreshold: 3
-#        readinessProbe:
-#          httpGet:
-#            path: /index.php
-#            port: http
-#          initialDelaySeconds: 180
-#          timeoutSeconds: 1
-#          successThreshold: 1
-#          failureThreshold: 3
+#livenessProbe#        livenessProbe:
+#livenessProbe#          httpGet:
+#livenessProbe#            path: /index.php
+#livenessProbe#            port: http
+#livenessProbe#          initialDelaySeconds: 180
+#livenessProbe#          timeoutSeconds: 5
+#livenessProbe#          successThreshold: 1
+#livenessProbe#          failureThreshold: 3
+#readinessProbe#        readinessProbe:
+#readinessProbe#          httpGet:
+#readinessProbe#            path: /index.php
+#readinessProbe#            port: http
+#readinessProbe#          initialDelaySeconds: 180
+#readinessProbe#          timeoutSeconds: 1
+#readinessProbe#          successThreshold: 1
+#readinessProbe#          failureThreshold: 3
         ports:
         - containerPort: 80
           name: http
         volumeMounts:
-        #- name: mediawiki-persistent-storage
-          #mountPath: /var/www/html
-        - name: mediawiki-etc-ssl-certs
-          mountPath: /etc/ssl/certs/incommon_intermed.pem
-          subPath: incommon_intermed.pem
+#persistent-storage#        - name: mediawiki-persistent-storage
+#persistent-storage#          mountPath: /var/www/html
+#etc-ssl-certs#        - name: mediawiki-etc-ssl-certs
+#etc-ssl-certs#          mountPath: /etc/ssl/certs/incommon_intermed.pem
+#etc-ssl-certs#          subPath: incommon_intermed.pem
         - name: mediawiki-php-config
           mountPath: /usr/local/etc/php/conf.d/mediawiki-php.ini
           subPath: mediawiki-php.ini
       volumes:
-      #- name: mediawiki-persistent-storage
-        #persistentVolumeClaim:
-          #claimName: mediawiki-pv-claim
-      - name: mediawiki-etc-ssl-certs
-        configMap:
-          name: mediawiki-etc-ssl-certs
+#persistent-storage#      - name: mediawiki-persistent-storage
+#persistent-storage#        persistentVolumeClaim:
+#persistent-storage#          claimName: mediawiki-pv-claim
+#etc-ssl-certs#      - name: mediawiki-etc-ssl-certs
+#etc-ssl-certs#        configMap:
+#etc-ssl-certs#          name: mediawiki-etc-ssl-certs
       - name: mediawiki-php-config
         configMap:
           name: mediawiki-php-config
