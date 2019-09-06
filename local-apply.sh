@@ -58,7 +58,7 @@ done
 kubectl get pods
 echo
 echo "opening the browser..."
-open http://mediawiki
+open http://127.0.0.1
 
 ##########################
 
