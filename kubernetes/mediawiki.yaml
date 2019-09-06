@@ -83,7 +83,7 @@ spec:
         app: mediawiki
     spec:
       containers:
-      - image: 127.0.0.1:30500/internal/mediawiki:1.32.0-v1
+      - image: mediawiki:1.33
         name: mediawiki
         env:
         - name: MARIADB_HOST
