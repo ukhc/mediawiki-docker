@@ -32,21 +32,6 @@ kubectl apply -f ./kubernetes/mediawiki-local-pv.yaml
 
 ##########################
 
-echo
-echo "#################################"
-echo "##  ADDING DNS TO /ETC/HOSTS   ##"
-echo "##             ---             ##"
-echo "## If you are prompted for a   ##"
-echo "## password, use your local    ##"
-echo "## account password.           ##"
-echo "#################################"
-echo
-
-# add dns
-sudo -- sh -c "echo 127.0.0.1 mediawiki  >> /etc/hosts"
-
-##########################
-
 echo "deploy mediawiki..."
 kubectl apply -f ./kubernetes/mediawiki.yaml
 
