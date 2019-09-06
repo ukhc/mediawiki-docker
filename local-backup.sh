@@ -40,6 +40,6 @@ kubectl cp $POD:/var/www/html ./backup/$BACKUP_FOLDER/html
 echo "backup database..."
 mkdir -p ./backup/$BACKUP_FOLDER/database
 POD=$(kubectl get pod -l app=mariadb -o jsonpath="{.items[0].metadata.name}")
-kubectl exec -it $POD -- /usr/bin/mysqldump -u root -padmin wordpress > ./backup/$BACKUP_FOLDER/database/wordpress-dump.sql
+kubectl exec -it $POD -- /usr/bin/mysqldump -u root -padmin mediawiki > ./backup/$BACKUP_FOLDER/database/mediawiki-dump.sql
 
 echo "...done"
