@@ -27,7 +27,7 @@ fi
 ##########################
 
 echo "setup the persistent volume for mediawiki...."
-mkdir -p /Users/Shared/Kubernetes/persistent-volumes/mediawiki
+mkdir -p /Users/Shared/Kubernetes/persistent-volumes/default/mediawiki
 kubectl apply -f ./kubernetes/mediawiki-local-pv.yaml
 
 ##########################
