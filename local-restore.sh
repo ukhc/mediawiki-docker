@@ -92,7 +92,7 @@ kubectl scale --replicas=1 deployment mediawiki
 
 ##########################
 
-# wait for mediawiki
+echo "wait for mediawiki..."
 isPodReady=""
 isPodReadyCount=0
 until [ "$isPodReady" == "true" ]
@@ -112,7 +112,7 @@ done
 
 ##########################
 
-echo "opening the browser..."
+echo "open the browser..."
 open http://127.0.0.1
 
 ##########################
