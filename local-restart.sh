@@ -66,7 +66,7 @@ kubectl scale --replicas=1 deployment mediawiki
 
 ##########################
 
-# wait for drupal
+# wait for mediawiki
 isPodReady=""
 isPodReadyCount=0
 until [ "$isPodReady" == "true" ]
