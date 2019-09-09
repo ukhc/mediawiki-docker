@@ -67,7 +67,8 @@ rm -f yaml.tmp
 cp ./kubernetes/mediawiki.yaml yaml.tmp
 
 #### Use the '--with-volumes' parameter to turn on the volume mounts ####
-if [ "$1" == "--with-volumes" ]; then
+if [ "$1" == "--with-volumes" ]
+then
     echo "--with-volumes parameter was used, turning on the persistent volumes..."
 	sed -i '' 's/#persistent-storage#//' yaml.tmp
 else
