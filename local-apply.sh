@@ -62,6 +62,11 @@ kubectl apply -f ./kubernetes/mediawiki-local-pv.yaml
 
 ##########################
 
+echo "deploy php config configmap..."
+kubectl apply -f ./kubernetes/mediawiki-php-config.yaml
+
+##########################
+
 echo "deploy mediawiki..."
 rm -f yaml.tmp
 cp ./kubernetes/mediawiki.yaml yaml.tmp

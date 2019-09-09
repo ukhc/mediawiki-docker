@@ -31,6 +31,11 @@ kubectl delete -f ./kubernetes/mediawiki.yaml
 
 ##########################
 
+echo "delete mediawiki-php-config configmap..."
+kubectl delete -f ./kubernetes/mediawiki-php-config.yaml
+
+##########################
+
 echo "delete the persistent volume for mediawiki...."
 kubectl delete -f ./kubernetes/mediawiki-local-pv.yaml
 rm -rf /Users/Shared/Kubernetes/persistent-volumes/default/mediawiki

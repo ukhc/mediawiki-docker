@@ -55,16 +55,6 @@ data:
 
 ---
 
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: mediawiki-php-config
-data:
-  mediawiki-php.ini: |
-    ;add php config here
-
----
-
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
