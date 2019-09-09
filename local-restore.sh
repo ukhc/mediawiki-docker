@@ -33,7 +33,7 @@ else
 	exit 1
 fi
 
-if [ "$2" == "--restore-all" ] || [ "$2" == "--restore-database " ] || [ "$2" == "--restore-files" ]
+if [ "$2" == "--restore-all" ] || [ "$2" == "--restore-database" ] || [ "$2" == "--restore-files" ]
 then
 	RESTORE_MODE="$2"
 else
