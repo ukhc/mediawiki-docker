@@ -78,7 +78,7 @@ do
 			echo "ERROR: timeout waiting for mediawiki pod. Exit script!"
 			exit 1
 		else
-			echo "waiting...mediawiki pod is not ready...($isPodReadyCount)"
+			echo "waiting...mediawiki pod is not ready...($isPodReadyCount/100)"
 			sleep 2
 		fi
 	fi
