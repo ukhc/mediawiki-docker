@@ -27,4 +27,4 @@ fi
 
 echo "get a shell to the mediawiki container..."
 POD=$(kubectl get pod -l app=mediawiki -o jsonpath="{.items[0].metadata.name}")
-kubectl --namespace wiki exec -it $POD /bin/bash
+kubectl exec -it $POD /bin/bash
